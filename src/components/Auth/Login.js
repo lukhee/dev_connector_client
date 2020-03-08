@@ -1,11 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const Lgin = ()=> {
+const Login = ()=> {
+
+    const [formData, setFormData] = useState({
+        email: "",
+    })
+
+    const { email, password } = formData
+
+    const onChange =(e)=> {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const onSubmit = (e)=> {
+        e.preventDefault()
+        console.log("SUCCESS")
+    }
+
+
     return (
-        <div>
-            <h1>Login</h1>
+        <div className="w-sm-75">
+            
+            <div className="mt-4">
+                <h1 className="text-danger"> Sign In </h1>
+                <p> <i className="fas fa-user" /> Sign Into Your Account </p>
+            </div>
+
+            <form onSubmit={(e)=>onSubmit(e)}>
+                <div className="form-group">
+                    <input className="form-control rounded-0" 
+                        type="email" 
+                        name="email" 
+                        value={email} 
+                        onChange={(e)=>onChange(e)}
+                        placeholder="Email here" 
+                        required />
+                </div>
+                <div className="form-group">
+                    <input className="form-control rounded-0" 
+                        type="password" 
+                        name="password" 
+                        value={password} 
+                        onChange={(e)=>onChange(e)}
+                        placeholder="Password" />
+                </div>
+                <button type="submit" className="btn btn-sm btn-danger rounded-0 mb-2"> Login </button>
+            </form>
+
+            <p className="d-inline"> Don't have an account? </p> <Link to="/register" className="text-danger"> Sign Up </Link>
+
         </div>
     )
 }
 
-export default Lgin
+export default Login
+
