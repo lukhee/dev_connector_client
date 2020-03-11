@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { setAlert } from  '../../action/alert'
+import { register } from  '../../action/auth'
 import PropTypes from 'prop-types'
 
-const Register = ({setAlert})=> {
+const Register = ({isAuthenticated, register})=> {
 
     const [formData, setFormData] = useState({
         name: "",
@@ -26,15 +27,14 @@ const Register = ({setAlert})=> {
         e.preventDefault()
         if(password !== password2){
             setAlert('password not match', "danger")
-        }
-        console.log("password are equal")
-        const newUser = {
-            name, 
-            email,
-            password
+        }else {
+            register({name, email, password})
         }
     }
 
+    if(isAuthenticated){
+        return <Redirect to='/dashbord' />
+    }
 
     return (
         <div className="w-sm-75">
@@ -59,8 +59,7 @@ const Register = ({setAlert})=> {
                         name="email" 
                         value={email} 
                         onChange={(e)=>onChange(e)}
-                        placeholder="Email here" 
-                        required />
+                        placeholder="Email here" />
                 </div>
                 <small className=" mb-3 text-muted form-text">This site uses Gravatar to populate image</small>
                 <div className="form-group">
@@ -80,7 +79,7 @@ const Register = ({setAlert})=> {
                         placeholder="Confirm Password" />
 
                 </div>
-                <button type="submit" className="btn btn-sm btn-danger rounded-0 mb-2"> Submit </button>
+                <button type="submit" className="btn btn-sm btn-danger rounded-0 mb-2"> Register </button>
             </form>
 
             <p className="d-inline"> Already have an accout? </p> <Link to="/login" className="text-danger"> Sign In </Link>
@@ -89,7 +88,13 @@ const Register = ({setAlert})=> {
     )
 }
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    isAuthenticated: PropTypes.bool
 }
 
-export default connect(null, { setAlert } ) (Register)
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
+}
+
+export default connect(mapStateToProps, { setAlert, register } ) (Register)

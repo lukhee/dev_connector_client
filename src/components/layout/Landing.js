@@ -33,7 +33,7 @@ const Landing = ()=> {
             <Background>
                 <Section className="text-light text-center pt-5"> 
                     <InnerSection>
-                        <h1 className="display-5 font-weight-bold">Developer connector</h1>
+                        <h1 className="display-5 font-weight-bold">Developer Connector</h1>
                         <p> Create an account, profile/portfolio and post and let get you connected to developers </p>
                         <Link to="/register" className="btn btn-sm btn-danger font-weight-normal rounded-0 mr-2"> Sign Up </Link> 
                         <Link to="/login" className="btn btn-sm font-weight-normal rounded-0 btn-light"> Login </Link>
