@@ -7,7 +7,8 @@ import PropTypes from 'prop-types'
 const Login = ({ login, isAuthenticated })=> {
 
     const [formData, setFormData] = useState({
-        email: "",
+        email: '',
+        password: ''
     })
 
     const { email, password } = formData
@@ -51,7 +52,7 @@ const Login = ({ login, isAuthenticated })=> {
                     <input className="form-control rounded-0" 
                         type="password" 
                         name="password" 
-                        value={password || ''} 
+                        value={password} 
                         onChange={(e)=>onChange(e)}
                         placeholder="Password" />
                 </div>

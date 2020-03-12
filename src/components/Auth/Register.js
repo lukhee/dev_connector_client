@@ -5,7 +5,7 @@ import { setAlert } from  '../../action/alert'
 import { register } from  '../../action/auth'
 import PropTypes from 'prop-types'
 
-const Register = ({isAuthenticated, register})=> {
+const Register = ({isAuthenticated, setAlert , register})=> {
 
     const [formData, setFormData] = useState({
         name: "",

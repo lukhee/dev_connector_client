@@ -1,4 +1,4 @@
-import { REGISTER_SUCCESS, REGISTER_FAILURE, AUTH_ERROR, USER_LOADED, LOGIN_SUCCESS, LOGIN_FAIL } from './constType'
+import { REGISTER_SUCCESS, REGISTER_FAILURE, AUTH_ERROR, USER_LOADED, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './constType'
 import { setAlert } from './alert'
 import API from '../api'
 import setAuthToken from '../util/setAuthToken'
@@ -13,7 +13,7 @@ export const loadUser = ( ) => async dispatch=> {
         const res = await API.get('/api/auth')
         dispatch({
             type: USER_LOADED,
-            payload: 'res.data'
+            payload: res.data
         })
     } catch (error) {
         dispatch({
@@ -83,3 +83,8 @@ export const login =  ({ email, password })=> async dispatch=> {
         })
     }
 }
+
+// Lougout / Clear Profile
+export const logout = ( ) => dispatch => ({
+    type: LOGOUT
+})
