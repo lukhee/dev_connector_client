@@ -1,4 +1,4 @@
-import { REGISTER_SUCCESS, REGISTER_FAILURE, AUTH_ERROR, USER_LOADED, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './constType'
+import { REGISTER_SUCCESS, REGISTER_FAILURE, AUTH_ERROR, USER_LOADED, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from './constType'
 import { setAlert } from './alert'
 import API from '../api'
 import setAuthToken from '../util/setAuthToken'
@@ -9,13 +9,21 @@ export const loadUser = ( ) => async dispatch=> {
     if(localStorage.token){
         setAuthToken(localStorage.token)
     }
+    
+    const config = {
+        headers : {
+            'x-auth-token': localStorage.token
+        }
+    }
     try {
-        const res = await API.get('/api/auth')
+        const res = await API.get('/api/auth', config)
+        console.log(res)
         dispatch({
             type: USER_LOADED,
             payload: res.data
         })
     } catch (error) {
+        console.log(error)
         dispatch({
             type: AUTH_ERROR
         })
@@ -60,7 +68,6 @@ export const login =  ({ email, password })=> async dispatch=> {
         }
     }
     const body = { email, password }
-    console.log(body)
 
     try {
         const res = await API.post('api/auth/login', body, config)
@@ -69,9 +76,10 @@ export const login =  ({ email, password })=> async dispatch=> {
             payload: res.data
         })
 
-        // dispatch(loadUser())
+        dispatch(loadUser())
 
     } catch (error) {
+        console.log(error)
         const errors = error.response.data.errors;
 
         if(errors){
@@ -85,6 +93,8 @@ export const login =  ({ email, password })=> async dispatch=> {
 }
 
 // Lougout / Clear Profile
-export const logout = ( ) => dispatch => ({
-    type: LOGOUT
-})
+export const logout = ( ) => dispatch => {
+    dispatch({  type: CLEAR_PROFILE })
+    dispatch({  type: LOGOUT })
+    
+}

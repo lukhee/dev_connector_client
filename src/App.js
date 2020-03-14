@@ -11,6 +11,10 @@ import store from './store'
 import { loadUser } from './action/auth'
 import setAuthToken from './util/setAuthToken'
 import Dashboard from './components/dashboard/dashboard'
+import CreateProfile from './components/profileForms/createProfile'
+import AddExperience from './components/profileForms/addExperience'
+import AddEducation from './components/profileForms/addEducation'
+import EditProfile from './components/profileForms/editProfile'
 import PrivateRoute from './components/routing/PrivateRoute'
 import './App.css';
 
@@ -35,6 +39,10 @@ const App= ()=> {
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/register" component={Register} />
                             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                            <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+                            <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+                            <PrivateRoute exact path="/add-experience" component={AddExperience} />
+                            <PrivateRoute exact path="/add-education" component={AddEducation} />
                         </Switch>
                     </section>
                     </Router>

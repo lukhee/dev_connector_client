@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from "styled-components"
 import background from "../../img/bg-image.jpg"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 const Background = styled.div`
     width: 100%;
@@ -27,7 +29,12 @@ const InnerSection = styled.section`
     display: inline-block;
 `
 
-const Landing = ()=> {
+const Landing = ({isAuthenticated})=> {
+    if(isAuthenticated){
+        return (
+            <Redirect to='/dashboard'/>
+        )
+    }
     return (
         <div>
             <Background>
@@ -44,4 +51,14 @@ const Landing = ()=> {
     )
 }
 
-export default Landing
+Landing.propTypes = {
+    isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
+}
+
+export default connect(mapStateToProps) (Landing)
