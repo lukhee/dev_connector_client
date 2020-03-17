@@ -14,6 +14,9 @@ import Dashboard from './components/dashboard/dashboard'
 import CreateProfile from './components/profileForms/createProfile'
 import AddExperience from './components/profileForms/addExperience'
 import AddEducation from './components/profileForms/addEducation'
+import Profiles from './components/profiles/profile'
+import Profile from './components/profile/profile'
+import Posts from './components/posts/posts'
 import EditProfile from './components/profileForms/editProfile'
 import PrivateRoute from './components/routing/PrivateRoute'
 import './App.css';
@@ -33,16 +36,19 @@ const App= ()=> {
                 <Router>
                     <Navbar/>
                     <Route exact  path="/" component={LandingPage} />
-                    <section className="container pt-5">
+                    <section className="container pt-5 mb-3">
                         <Alert/>
                         <Switch>
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/register" component={Register} />
+                            <Route exact path="/profiles" component={Profiles} />
+                            <Route exact path='/profile/:id' component={Profile} />
                             <PrivateRoute exact path="/dashboard" component={Dashboard} />
                             <PrivateRoute exact path="/create-profile" component={CreateProfile} />
                             <PrivateRoute exact path="/edit-profile" component={EditProfile} />
                             <PrivateRoute exact path="/add-experience" component={AddExperience} />
                             <PrivateRoute exact path="/add-education" component={AddEducation} />
+                            <PrivateRoute exact path="/posts" component={Posts} />
                         </Switch>
                     </section>
                     </Router>

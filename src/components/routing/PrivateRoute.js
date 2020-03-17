@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 
 const PrivateRoute = ({component: Component, auth: { loading, isAuthenticated}, ...rest})=> {
-    console.log({...rest})
     return (
         <Route 
             {...rest} 

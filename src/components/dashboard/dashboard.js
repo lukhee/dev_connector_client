@@ -1,15 +1,18 @@
 import React, { useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getCurrentProfile } from '../../action/profile'
+import { getCurrentProfile, deleteAccount } from '../../action/profile'
 import Spinner from '../layout/spinner/spinner'
 import { Link } from 'react-router-dom'
 import DashBoardAction from './dashBoardaction'
+import Experience from './Experience'
+import Education from './Education'
 
-function Dashborad({getCurrentProfile, auth: { user }, profile: {profile, loading}}) {
+function Dashborad({getCurrentProfile, deleteAccount, auth: { user }, profile: {profile, loading}}) {
     useEffect(()=>{
-        getCurrentProfile()
+        getCurrentProfile() 
     }, [getCurrentProfile])
+
     return loading && profile === null ? 
         <Spinner /> : 
         <Fragment> 
@@ -18,6 +21,15 @@ function Dashborad({getCurrentProfile, auth: { user }, profile: {profile, loadin
             {profile !== null ? (
                 <Fragment> 
                     <DashBoardAction />
+                    <Experience experience={profile.experience}/>
+                    <Education education={profile.education}/>
+
+                    <div className="my-2">
+                        <button 
+                        className="btn btn-sm btn-danger rounded-0"
+                        onClick={()=> deleteAccount() }>
+                            <i className="fas fa-user-minus" /> Delete My Account </button>
+                    </div>
                 </Fragment>) : 
                 (<Fragment> 
                     <p>You have not setup a profile yet, please add now! </p>
@@ -30,6 +42,7 @@ Dashborad.propTypes = {
     getCurrentProfile : PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
+    deleteAccount: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -39,4 +52,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getCurrentProfile}) (Dashborad)
+export default connect(mapStateToProps, {getCurrentProfile, deleteAccount}) (Dashborad)
