@@ -204,7 +204,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
                 'x-auth-token': localStorage.token
             }
         }
-        const res = await API.delete(`/api/post/comment/${postId}/${commentId}`, config)
+        await API.delete(`/api/post/comment/${postId}/${commentId}`, config)
         dispatch({
             type: REMOVE_COMMENT,
             payload: commentId

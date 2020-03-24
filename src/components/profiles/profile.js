@@ -18,7 +18,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading }  }) => {
                     <i className="fab fa-connectdevelop"></i> Browse and connect with developers
                 </p>
                 <div>
-                    {!loading && profiles.length > 0 ? (
+                    {profiles.length > 0 ? (
                         profiles.map(profile => (
                             <ProfileItem key={profile._id} profile={profile} />
                         ))

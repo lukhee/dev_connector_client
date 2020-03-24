@@ -20,7 +20,7 @@ function Profile({ getProfileById, profile: {profile, loading}, auth, match }) {
                     <div className="d-flex justify-content-between">
                         <Link className="btn btn-sm btn-danger rounded-0 my-2 mr-2" to="/profiles"> Back To Profiles</Link>
                         {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id ? 
-                        <Link className="btn btn-sm btn-light rounded-0 my-2" to="/edit_profile">Edit Profile</Link> : null}
+                        <Link className="btn btn-sm btn-light rounded-0 my-2" to="/edit-profile">Edit Profile</Link> : null}
                     </div>
                     <div>
                         <ProfileTop profile={profile} />
@@ -34,7 +34,7 @@ function Profile({ getProfileById, profile: {profile, loading}, auth, match }) {
                                             <ProfileExperience key={experience._id} experience={experience} />
                                         ))
                                     }
-                                </Fragment> : <h4> No experience credentials</h4>}
+                                </Fragment> : <h5 className="lead"> No experience credentials</h5>}
                             </div>
                             <div className="bg-white border col-sm ml-sm-1 my-1"> 
                                 <h2 className="text-danger"> Education </h2>

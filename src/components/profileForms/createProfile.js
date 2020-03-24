@@ -37,7 +37,11 @@ const CreateForm = ({ CreateProfile, history })=> {
         instagram
     } = formData
 
-    const onChnage = e => setFormData({ ...formData, [e.target.name]: e.target.value})
+    const onChnage = e => {
+        console.log(e.target.value)
+        console.log(formData)
+        setFormData({ ...formData, [e.target.name]: e.target.value})
+    }
 
     const onSubmit = e => {
         e.preventDefault();

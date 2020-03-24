@@ -1,4 +1,11 @@
-import { GET_PROFILE, GET_PROFILES, GET_REPOS, UPDATE_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, ACCOUNT_DELETED } from '../action/constType'
+import { GET_PROFILE,
+    GET_PROFILES, 
+    GET_REPOS, 
+    UPDATE_PROFILE, 
+    PROFILE_ERROR, 
+    CLEAR_PROFILE, 
+//  ACCOUNT_DELETED
+    } from '../action/constType'
 const initialState = {
     profile: null,
     profiles: [],

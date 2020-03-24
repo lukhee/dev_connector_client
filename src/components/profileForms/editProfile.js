@@ -39,7 +39,7 @@ const EditProfile = ({  profile: {profile, loading}, CreateProfile, getCurrentPr
             youtube: loading || !profile.social? '' : profile.social.youtube,
             instagram: loading || !profile.social? '' : profile.social.instagram,
         })
-    }, [loading, getCurrentProfile])
+    }, [loading, getCurrentProfile, profile])
 
     const {
         company,
@@ -56,10 +56,14 @@ const EditProfile = ({  profile: {profile, loading}, CreateProfile, getCurrentPr
         instagram
     } = formData
 
-    const onChnage = e => setFormData({ ...formData, [e.target.name]: e.target.value})
+    const onChange = e =>{
+        setFormData({ ...formData, [e.target.name]: e.target.value})
+        console.log(formData)
+    }
 
     const onSubmit = e => {
         e.preventDefault();
+        console.log(formData) 
         CreateProfile(formData, history, true);
     }
     return (
@@ -71,7 +75,7 @@ const EditProfile = ({  profile: {profile, loading}, CreateProfile, getCurrentPr
             <small> * required field </small>
             <form onSubmit = {(e)=> onSubmit(e)}>
                 <div className="form-group">
-                    <select className="form-control form-control-sm font-weight-bold rounded-0" value={status} onChange={e => onChnage(e)} name='status'>
+                    <select className="form-control form-control-sm font-weight-bold rounded-0" value={status} onChange={e => onChange(e)} name='status'>
                         <option value="0"> * Select Professional Status</option>
                         <option value="Developer"> Developer </option>
                         <option value="Junior Developer"> Junior Developer </option>
@@ -84,32 +88,32 @@ const EditProfile = ({  profile: {profile, loading}, CreateProfile, getCurrentPr
                 </div>
 
                 <div className="form-group">
-                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={company}  onChange={e => onChnage(e)} placeholder="company" name="company" />
+                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={company}  onChange={e => onChange(e)} placeholder="company" name="company" />
                     <small className="form-text"> Could be your company or one you work for </small>
                 </div>
 
                 <div className="form-group">
-                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={website}  onChange={e => onChnage(e)} placeholder="website" name="website" />
+                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={website}  onChange={e => onChange(e)} placeholder="website" name="website" />
                     <small className="form-text"> Could be your own or company you work for</small>
                 </div>
 
                 <div className="form-group">
-                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={location}  onChange={e => onChnage(e)} placeholder="location" name="location" />
+                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={location}  onChange={e => onChange(e)} placeholder="location" name="location" />
                     <small className="form-text"> City & state suggested (eg. Lagos, Nigeria) </small>
                 </div>
 
                 <div className="form-group">
-                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={skills}  onChange={e => onChnage(e)} placeholder="skills" name="skills" />
+                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={skills}  onChange={e => onChange(e)} placeholder="skills" name="skills" />
                     <small className="form-text"> Please use comma seperated value (eg. HTML, CSS, JAVASCRIPT) </small>
                 </div>
 
                 <div className="form-group">
-                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={githubusername}  onChange={e => onChnage(e)} placeholder="githubusername" name="githubusername" />
+                    <input type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={githubusername}  onChange={e => onChange(e)} placeholder="githubusername" name="githubusername" />
                     <small className="form-text"> Please valid name used in your github</small>
                 </div>
 
                 <div className="form-group">
-                    <textarea type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={bio}  onChange={e => onChnage(e)} placeholder="short bio of yourself" name="bio" />
+                    <textarea type="text" className="form-control form-control-sm font-weight-bold rounded-0" value={bio}  onChange={e => onChange(e)} placeholder="short bio of yourself" name="bio" />
                     <small className="form-text"> Shortly describe who you are. </small>
                 </div>
 
@@ -123,27 +127,27 @@ const EditProfile = ({  profile: {profile, loading}, CreateProfile, getCurrentPr
                 <>
                     <div className="form-group">
                         <i style={{width: "30px"}} className="align-middle text-primary fab fa-twitter fa-2x"/>
-                    <input type="text" className="rounded-0 form-control form-control-sm font-weight-bold w-75 d-inline-block align-middle ml-2" value={twitter}  onChange={e => onChnage(e)} placeholder="Twitter Url" name="twitter" />
+                    <input type="text" className="rounded-0 form-control form-control-sm font-weight-bold w-75 d-inline-block align-middle ml-2" value={twitter}  onChange={e => onChange(e)} placeholder="Twitter Url" name="twitter" />
                     </div>
 
                     <div className="form-group">
                         <i style={{width: "30px"}} className="align-middle text-danger fab fa-youtube fa-2x"/>
-                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={youtube}  onChange={e => onChnage(e)} placeholder="youtube Url" name="youtube" />
+                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={youtube}  onChange={e => onChange(e)} placeholder="youtube Url" name="youtube" />
                     </div>
 
                     <div className="form-group">
                         <i  style={{width: "30px"}} className="align-middle text-info fab fa-linkedin fa-2x"/>
-                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={linkedin}  onChange={e => onChnage(e)} placeholder="Linkedin Url" name="linkedin" />
+                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={linkedin}  onChange={e => onChange(e)} placeholder="Linkedin Url" name="linkedin" />
                     </div>
 
                     <div className="form-group">
                         <i style={{width: "30px"}} className="align-middle text-info fab fa-instagram fa-2x"/>
-                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={instagram}  onChange={e => onChnage(e)} placeholder="Instagram Url" name="instagram" />
+                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={instagram}  onChange={e => onChange(e)} placeholder="Instagram Url" name="instagram" />
                     </div>
                     
                     <div className="form-group">
                         <i  style={{width: "30px"}} className="align-middle text-primary fab fa-facebook fa-2x"/>
-                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={facebook}  onChange={e => onChnage(e)} placeholder="Facebook Url" name="facebook" />
+                        <input type="text" className="rounded-0 form-control form-control-sm w-75 d-inline-block align-middle ml-2" value={facebook}  onChange={e => onChange(e)} placeholder="Facebook Url" name="facebook" />
                     </div>
                 </>}
                 <div className="form-group">

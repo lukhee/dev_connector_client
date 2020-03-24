@@ -1,4 +1,4 @@
-import React, { Fragment, Profiler } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -14,11 +14,13 @@ const PostItem = ({ addLike, removeLike, deletePost, showAction,  auth, post: { 
                     <h5 className="text-capitalize text-danger"> {name} </h5>
                 </Link>
             </div>
-            <div className="col-sm my-1 align-self-end">
-                <p className="my-2">
-                    {text}
-                </p>
-                <p className="post-date text-muted mb-0"> Posted on <Moment format="YYYY/MM/DD">{date}</Moment></p>
+            <div className="col-sm my-1">
+                <div className="d-flex align-items-start flex-column my-2">
+                    <p className={showAction? "truncate" : 'my-2'}>
+                        {text}
+                    </p>
+                    <p className="post-date text-muted mt-auto"> Posted on <Moment format="YYYY/MM/DD">{date}</Moment></p>
+                </div>
                 {showAction && <Fragment>
                     <button onClick={e => addLike(_id)} type="button" className="btn btn-light btn-sm rounded-0 mr-2"> 
                     <i className="fas fa-thumbs-up mr-2"/>

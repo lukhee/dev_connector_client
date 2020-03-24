@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react'
-import { Link } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 import styled from "styled-components"
 import {connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../action/auth'
 
-const NavLink = styled.span`
+const NavlinkStyle = styled.span`
     color: white;
     font-size: 1.1rem;
     font-weight: 600;
@@ -14,21 +14,21 @@ const NavLink = styled.span`
     }
 `
 
-const Navbar = ({ auth: { isAuthenticated, loading}, logout })=> {
+const Navbar = ({ history, auth: { isAuthenticated, loading}, logout })=> {
     const authLinks = (
     <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
         <li className="nav-item active">
-            <Link className="nav-link" to="/profiles"><NavLink>Developers</NavLink></Link>
+            <NavLink className="nav-link" activeClassName="activeLink" to="/profiles"><NavlinkStyle>Developers</NavlinkStyle></NavLink>
         </li>
-        <li className="nav-item active">
-            <Link className="nav-link" to="/posts"><NavLink>Posts</NavLink></Link>
+        <li className="nav-item">
+            <NavLink className="nav-link" activeClassName="activeLink" to="/posts"><NavlinkStyle>Posts</NavlinkStyle></NavLink>
         </li>
-        <li className="nav-item active">
-            <Link className="nav-link" to="/dashboard"><NavLink>Dashboard</NavLink></Link>
+        <li className="nav-item">
+            <NavLink className="nav-link" activeClassName="activeLink" to="/dashboard"><NavlinkStyle>Dashboard</NavlinkStyle></NavLink>
         </li>
-        <li className="nav-item active">
+        <li className="nav-item">
             {/* <i className="fas fa-sign-out-alt" /> */}
-            <span onClick={logout} className="nav-link hide-sm"><NavLink>Logout</NavLink></span>
+            <span onClick={()=>logout(history)} className="nav-link hide-sm" ><NavlinkStyle>Logout</NavlinkStyle></span>
         </li>
     </ul> 
 
@@ -36,28 +36,28 @@ const Navbar = ({ auth: { isAuthenticated, loading}, logout })=> {
     const guestLinks = (
     <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
         <li className="nav-item active">
-            <Link className="nav-link" to="/profiles"><NavLink>Developers</NavLink></Link>
+            <NavLink className="nav-link" activeClassName="activeLink" to="/profiles"><NavlinkStyle>Developers <span className="sr-only">(current)</span> </NavlinkStyle></NavLink>
         </li>
-        <li className="nav-item active">
-            <Link className="nav-link" to="/register"><NavLink>Register</NavLink></Link>
+        <li className="nav-item">
+            <NavLink className="nav-link" activeClassName="activeLink" to="/register"><NavlinkStyle>Register</NavlinkStyle></NavLink>
         </li>
-        <li className="nav-item active">
-            <Link className="nav-link" to="/login"><NavLink>Login</NavLink></Link>
+        <li className="nav-item">
+            <NavLink className="nav-link" activeClassName="activeLink" to="/login"><NavlinkStyle>Login</NavlinkStyle></NavLink>
         </li>
     </ul>
     )
 
     return (
         <div>
-            <nav style={{background: "#343a40ab"}} className="navbar fixed-top navbar-expand-lg navbar-dark">
-                <Link className="navbar-brand" to="/">
+            <nav style={{background: "#343a40ab"}}  className="navbar fixed-top navbar-expand-lg navbar-dark">
+                <NavLink className="navbar-brand" to="/">
                     <i className="fas fa-code" />
-                    DevConnectors</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    DevConnectors</NavLink>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <div className="collapse navbar-collapse" id="navbarNav">
                     {!loading ? (<Fragment>
                         {isAuthenticated? authLinks : guestLinks }
                     </Fragment>): null}
@@ -78,4 +78,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { logout }) (Navbar)
+export default connect(mapStateToProps, { logout }) (withRouter(Navbar))

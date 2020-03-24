@@ -19,7 +19,7 @@ const ProfileAbout = ({
             <h2 className="text-danger"> Skill Set </h2>
             <div> 
                 {skills.map((skill, index)=> 
-                    <span key={index}> 
+                    <span key={index} className="mr-2"> 
                         <i className="fas fa-check"/> {skill}
                     </span>
                 )}
@@ -30,7 +30,7 @@ const ProfileAbout = ({
 }
 
 ProfileAbout.propTypes = {
-
+    profile: PropTypes.object.isRequired
 }
 
 export default ProfileAbout
