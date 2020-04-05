@@ -39,7 +39,8 @@ const EditProfile = ({  profile: {profile, loading}, CreateProfile, getCurrentPr
             youtube: loading || !profile.social? '' : profile.social.youtube,
             instagram: loading || !profile.social? '' : profile.social.instagram,
         })
-    }, [loading, getCurrentProfile, profile])
+        // eslint-disable-next-line
+    }, [ getCurrentProfile])
 
     const {
         company,
