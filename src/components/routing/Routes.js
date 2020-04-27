@@ -18,7 +18,7 @@ import Alert from '../layout/alert'
 function Routes() {
     return (
         <Fragment>
-            <section className="container pt-5 mb-3">
+            <section className="container pt-5 my-3">
                 <Alert/>
                 <Switch>
                     <Route exact path="/login" component={Login} />

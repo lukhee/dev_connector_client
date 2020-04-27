@@ -14,7 +14,6 @@ const Background = styled.div`
     background-attachment: fixed;
     background-size: cover;
     background-color: #464646;
-    paddind-top: 50px;
 `
 
 const Section = styled.section`
@@ -22,7 +21,7 @@ const Section = styled.section`
     width: 100vw;
     height: 100vh;
     vertical-align: middle;
-    text-align: center
+    text-align: center;
 `
 
 const InnerSection = styled.section`
